@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Hydrogen / Vite / React build outputs
+dist/
+build/
+.vite/
+.cache/
+
+# Next / Hydrogen generated
+.next/
+.vercel/
+
+**/.react-router/
+
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Sanity
+.sanity/
+sanity/node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+
+node_modules/
+cms/node_modules/
+hydrogen-quickstart/node_modules/
+

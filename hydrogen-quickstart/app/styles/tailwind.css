@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+@layer base {
+  body {
+    @apply font-montserrat;
+  }
+}
+@layer components {
+  .add-to-cart-btn button {
+    background-color: var(--btn-bg) !important;
+    color: var(--btn-text) !important;
+    transition: all 300ms ease;
+    border-radius: inherit;
+  }
+
+  .add-to-cart-btn button:hover {
+    background-color: var(--btn-hover-bg) !important;
+    color: var(--btn-hover-text) !important;
+  }
+}
