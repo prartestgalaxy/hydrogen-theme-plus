@@ -1,0 +1,11 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm ci --omit=dev"
+
+[deploy]
+startCommand = "NODE_OPTIONS=--max-old-space-size=2048 npm run serve"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[nixpacks.environment]
+NODE_VERSION = "20"

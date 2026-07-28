@@ -8,6 +8,7 @@
     "build": "NODE_OPTIONS=--max-old-space-size=4096 shopify hydrogen build --codegen",
     "dev": "shopify hydrogen dev --codegen",
     "preview": "NODE_OPTIONS=--max-old-space-size=4096 shopify hydrogen preview --build",
+    "serve": "shopify hydrogen preview",
     "lint": "eslint --no-error-on-unmatched-pattern .",
     "codegen": "shopify hydrogen codegen && react-router typegen"
   },

@@ -3,13 +3,33 @@
 /* eslint-disable */
 import type * as CustomerAccountAPI from '@shopify/hydrogen/customer-account-api-types';
 
+export type CustomerAddressCreateMutationVariables = CustomerAccountAPI.Exact<{
+  address: CustomerAccountAPI.CustomerAddressInput;
+  defaultAddress?: CustomerAccountAPI.InputMaybe<
+    CustomerAccountAPI.Scalars['Boolean']['input']
+  >;
+}>;
+
+export type CustomerAddressCreateMutation = {
+  customerAddressCreate?: CustomerAccountAPI.Maybe<{
+    customerAddress?: CustomerAccountAPI.Maybe<
+      Pick<CustomerAccountAPI.CustomerAddress, 'id'>
+    >;
+    userErrors: Array<
+      Pick<
+        CustomerAccountAPI.UserErrorsCustomerAddressUserErrors,
+        'code' | 'field' | 'message'
+      >
+    >;
+  }>;
+};
+
 export type CustomerAddressUpdateMutationVariables = CustomerAccountAPI.Exact<{
   address: CustomerAccountAPI.CustomerAddressInput;
   addressId: CustomerAccountAPI.Scalars['ID']['input'];
   defaultAddress?: CustomerAccountAPI.InputMaybe<
     CustomerAccountAPI.Scalars['Boolean']['input']
   >;
-  language?: CustomerAccountAPI.InputMaybe<CustomerAccountAPI.LanguageCode>;
 }>;
 
 export type CustomerAddressUpdateMutation = {
@@ -28,7 +48,6 @@ export type CustomerAddressUpdateMutation = {
 
 export type CustomerAddressDeleteMutationVariables = CustomerAccountAPI.Exact<{
   addressId: CustomerAccountAPI.Scalars['ID']['input'];
-  language?: CustomerAccountAPI.InputMaybe<CustomerAccountAPI.LanguageCode>;
 }>;
 
 export type CustomerAddressDeleteMutation = {
@@ -45,28 +64,6 @@ export type CustomerAddressDeleteMutation = {
       >;
     }
   >;
-};
-
-export type CustomerAddressCreateMutationVariables = CustomerAccountAPI.Exact<{
-  address: CustomerAccountAPI.CustomerAddressInput;
-  defaultAddress?: CustomerAccountAPI.InputMaybe<
-    CustomerAccountAPI.Scalars['Boolean']['input']
-  >;
-  language?: CustomerAccountAPI.InputMaybe<CustomerAccountAPI.LanguageCode>;
-}>;
-
-export type CustomerAddressCreateMutation = {
-  customerAddressCreate?: CustomerAccountAPI.Maybe<{
-    customerAddress?: CustomerAccountAPI.Maybe<
-      Pick<CustomerAccountAPI.CustomerAddress, 'id'>
-    >;
-    userErrors: Array<
-      Pick<
-        CustomerAccountAPI.UserErrorsCustomerAddressUserErrors,
-        'code' | 'field' | 'message'
-      >
-    >;
-  }>;
 };
 
 export type CustomerFragment = Pick<
@@ -519,17 +516,17 @@ interface GeneratedQueryTypes {
 }
 
 interface GeneratedMutationTypes {
-  '#graphql\n  mutation customerAddressUpdate(\n    $address: CustomerAddressInput!\n    $addressId: ID!\n    $defaultAddress: Boolean\n    $language: LanguageCode\n ) @inContext(language: $language) {\n    customerAddressUpdate(\n      address: $address\n      addressId: $addressId\n      defaultAddress: $defaultAddress\n    ) {\n      customerAddress {\n        id\n      }\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
+  '#graphql\n  mutation customerAddressCreate(\n    $address: CustomerAddressInput!\n    $defaultAddress: Boolean\n  ) {\n    customerAddressCreate(\n      address: $address\n      defaultAddress: $defaultAddress\n    ) {\n      customerAddress {\n        id\n      }\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
+    return: CustomerAddressCreateMutation;
+    variables: CustomerAddressCreateMutationVariables;
+  };
+  '#graphql\n  mutation customerAddressUpdate(\n    $address: CustomerAddressInput!\n    $addressId: ID!\n    $defaultAddress: Boolean\n  ) {\n    customerAddressUpdate(\n      address: $address\n      addressId: $addressId\n      defaultAddress: $defaultAddress\n    ) {\n      customerAddress {\n        id\n      }\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
     return: CustomerAddressUpdateMutation;
     variables: CustomerAddressUpdateMutationVariables;
   };
-  '#graphql\n  mutation customerAddressDelete(\n    $addressId: ID!\n    $language: LanguageCode\n  ) @inContext(language: $language) {\n    customerAddressDelete(addressId: $addressId) {\n      deletedAddressId\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
+  '#graphql\n  mutation customerAddressDelete($addressId: ID!) {\n    customerAddressDelete(addressId: $addressId) {\n      deletedAddressId\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
     return: CustomerAddressDeleteMutation;
     variables: CustomerAddressDeleteMutationVariables;
-  };
-  '#graphql\n  mutation customerAddressCreate(\n    $address: CustomerAddressInput!\n    $defaultAddress: Boolean\n    $language: LanguageCode\n  ) @inContext(language: $language) {\n    customerAddressCreate(\n      address: $address\n      defaultAddress: $defaultAddress\n    ) {\n      customerAddress {\n        id\n      }\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
-    return: CustomerAddressCreateMutation;
-    variables: CustomerAddressCreateMutationVariables;
   };
   '#graphql\n  mutation customerUpdate(\n    $customer: CustomerUpdateInput!\n    $language: LanguageCode\n  ) @inContext(language: $language) {\n    customerUpdate(input: $customer) {\n      customer {\n        firstName\n        lastName\n        emailAddress {\n          emailAddress\n        }\n        phoneNumber {\n          phoneNumber\n        }\n      }\n      userErrors {\n        code\n        field\n        message\n      }\n    }\n  }\n': {
     return: CustomerUpdateMutation;
