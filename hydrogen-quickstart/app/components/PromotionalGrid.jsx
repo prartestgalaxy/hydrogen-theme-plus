@@ -105,8 +105,7 @@ export default function PromotionalGrid({module, globalSettingsData}) {
 
               <div
                 style={{backgroundColor: overlayBg}}
-                className="absolute bottom-0 left-0 p-8 w-full sm:w-auto sm:min-w-[320px] backdrop-blur-md"
-                className="absolute bottom-0 left-0 p-[30px] w-full max-w-[400px] h-full max-h-[180px] "
+                className="absolute bottom-0 left-0 p-[30px] w-full max-w-[400px] h-full max-h-[180px]"
               >
                 <h4
                   className={`promo-card-heading font-bold mb-5 ${card?.headingSize || ''}`}
@@ -114,10 +113,7 @@ export default function PromotionalGrid({module, globalSettingsData}) {
                     lineHeight: '34px',
                     letterSpacing: '0.1px',
                     color: headingColor,
-                    ...(card?.headingSize ? {} : {}),
                   }}
-                  className={`promo-card-heading  mb-5 ${card?.headingSize || ''}`}
-                  
                 >
                   {card?.heading}
                 </h4>
@@ -178,7 +174,6 @@ function RenderButton({cta, globalSettings, themeColor, forceModuleStyle}) {
       to={url}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="promo-card-btn inline-block border border-white/40 px-[41.86px] py-[15.7px] text-[14px] font-bold uppercase tracking-[0.25em] transition-all duration-300 leading-[23.02px]"
       className="promo-card-btn inline-block border border-white/40 px-[40px] py-[16px] w-full uppercase max-w-fit transition-all duration-300"
       style={{
         backgroundColor: isHovered ? finalHoverBg : 'transparent',
