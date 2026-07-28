@@ -521,7 +521,7 @@ export function useGlobalData() {
 }
 
 const RECOMMENDED_PRODUCT_FRAGMENT = `#graphql
-  fragment RecommendedProduct on Product {
+  fragment CartRecommendedProduct on Product {
     id
     title
     handle
@@ -588,7 +588,7 @@ const RECOMMENDATIONS_QUERY = `#graphql
   query getProductRecommendations($productId: ID!, $country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     productRecommendations(productId: $productId) {
-      ...RecommendedProduct
+      ...CartRecommendedProduct
     }
   }
   ${RECOMMENDED_PRODUCT_FRAGMENT}
