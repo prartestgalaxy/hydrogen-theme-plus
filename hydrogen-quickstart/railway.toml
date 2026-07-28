@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm ci --omit=dev"
+buildCommand = "npm install --omit=dev"
 
 [deploy]
 startCommand = "NODE_OPTIONS=--max-old-space-size=2048 npm run serve"
