@@ -4,15 +4,58 @@
  * WITHOUT using workerd/miniflare (which crashes in Railway containers).
  */
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
 import { createReadStream, statSync } from 'node:fs';
 import { resolve, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Readable } from 'node:stream';
+import { webcrypto } from 'node:crypto';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const CLIENT_DIR = resolve(__dirname, 'dist/client');
+
+// ---------------------------------------------------------------------------
+// Polyfill Cloudflare Workers globals that the Hydrogen bundle expects
+// ---------------------------------------------------------------------------
+
+// 1. crypto.subtle — available in Node 18+ via globalThis.crypto but map it
+if (!globalThis.crypto) {
+  globalThis.crypto = webcrypto;
+}
+
+// 2. caches — Cloudflare Cache API (in-memory stub for Node.js)
+if (!globalThis.caches) {
+  const cacheStore = new Map();
+
+  class NodeCache {
+    #store = new Map();
+
+    async match(request) {
+      const url = typeof request === 'string' ? request : request.url;
+      return this.#store.get(url) ?? undefined;
+    }
+    async put(request, response) {
+      const url = typeof request === 'string' ? request : request.url;
+      this.#store.set(url, response.clone());
+    }
+    async delete(request) {
+      const url = typeof request === 'string' ? request : request.url;
+      return this.#store.delete(url);
+    }
+  }
+
+  globalThis.caches = {
+    async open(cacheName) {
+      if (!cacheStore.has(cacheName)) cacheStore.set(cacheName, new NodeCache());
+      return cacheStore.get(cacheName);
+    },
+    async has(cacheName) { return cacheStore.has(cacheName); },
+    async delete(cacheName) { return cacheStore.delete(cacheName); },
+    async keys() { return Array.from(cacheStore.keys()); },
+    async match(request) { return undefined; },
+    default: new NodeCache(),
+  };
+}
 
 // MIME types for static assets
 const MIME = {
