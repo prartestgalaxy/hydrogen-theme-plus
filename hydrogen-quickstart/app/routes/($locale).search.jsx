@@ -1143,8 +1143,9 @@ export default function SearchPage() {
   );
 }
 
-// QUICK_VIEW_QUERY
-const QUICK_VIEW_QUERY = `#graphql
+// NOTE: This is NOT a Storefront API query. It is kept as a plain string
+// to avoid codegen validation errors. Settings are fetched from Sanity via sanityClient.
+const QUICK_VIEW_QUERY = `
   query QuickViewSettings {
     quickViewSettings: allQuickViewSettings {
       styling {

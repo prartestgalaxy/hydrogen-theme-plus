@@ -1156,8 +1156,9 @@ export default function Collection() {
   );
 }
 
-// Add ROOT_QUERY for quick view config (keep as is)
-const ROOT_QUERY = `#graphql
+// NOTE: This is NOT a Storefront API query. It is kept as a plain string
+// to avoid codegen validation errors. Settings are fetched from Sanity via sanityClient.
+const ROOT_QUERY = `
   query RootQuery {
     sanityData: sanitySettings {
       settings {
