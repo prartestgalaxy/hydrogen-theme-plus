@@ -3,7 +3,7 @@ builder = "nixpacks"
 buildCommand = "npm install --omit=dev"
 
 [deploy]
-startCommand = "NODE_OPTIONS=--max-old-space-size=2048 npm run serve"
+startCommand = "npm run serve"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 
