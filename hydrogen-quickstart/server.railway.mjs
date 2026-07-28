@@ -32,11 +32,21 @@ if (!globalThis.caches) {
 
     async match(request) {
       const url = typeof request === 'string' ? request : request.url;
-      return this.#store.get(url) ?? undefined;
+      const cached = this.#store.get(url);
+      if (!cached) return undefined;
+      try {
+        return cached.clone();
+      } catch (err) {
+        return undefined;
+      }
     }
     async put(request, response) {
       const url = typeof request === 'string' ? request : request.url;
-      this.#store.set(url, response.clone());
+      try {
+        this.#store.set(url, response.clone());
+      } catch (err) {
+        // Ignore clone errors if response is un-clonable
+      }
     }
     async delete(request) {
       const url = typeof request === 'string' ? request : request.url;
