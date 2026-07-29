@@ -595,10 +595,10 @@ function SearchAside({
 
                             <div className="relative md:absolute md:right-0 md:top-0 h-[65px] md:h-full w-full md:w-[45%] flex items-center justify-center md:justify-end order-first md:order-last">
                               <img
-                                src={collection.image.url}
-                                alt={collection.image.altText || collection.title}
-                                width={collection.image.width}
-                                height={collection.image.height}
+                                src={collection?.image?.url}
+                                alt={collection?.image?.altText || collection?.title}
+                                width={collection?.image?.width}
+                                height={collection?.image?.height}
                                 className="h-full md:h-[85%] w-auto max-w-full object-contain object-center md:object-right mix-blend-multiply group-hover:scale-105 transition-transform duration-300 md:mr-3"
                               />
                             </div>

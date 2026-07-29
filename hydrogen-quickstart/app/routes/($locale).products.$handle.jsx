@@ -3379,7 +3379,7 @@ async function loadCriticalData({ context, params, request }) {
   return {
     product,
     pdpSettings,
-    isWishlistEnabled: wishlistSettings.enabled,
+    isWishlistEnabled: wishlistSettings?.enabled,
     isLoggedIn,
     recommendationsSettings,
     enableStickyBar: stickyBarSetting ?? true,

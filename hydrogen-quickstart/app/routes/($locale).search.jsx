@@ -13,6 +13,7 @@ import { INVENTORY_SETTINGS_QUERY } from '~/sanity/queries/inventorythreshold';
 import { PLP_SETTINGS_QUERY } from '~/sanity/queries/plpsetting';
 import Filter from '~/components/Filter';
 import { CartForm } from '@shopify/hydrogen';
+import groq from "groq";
 
 // DEFAULT FALLBACK CONFIGURATIONS
 const DEFAULT_PLP_SETTINGS = {
@@ -1145,27 +1146,49 @@ export default function SearchPage() {
 
 // NOTE: This is NOT a Storefront API query. It is kept as a plain string
 // to avoid codegen validation errors. Settings are fetched from Sanity via sanityClient.
-const QUICK_VIEW_QUERY = `
-  query QuickViewSettings {
-    quickViewSettings: allQuickViewSettings {
-      styling {
-        maxWidth
-        backgroundColor
-        textColor
-        buttonColor
-        buttonTextColor
-        fontSize
-        borderRadius
-      }
-      contentElements {
-        elementType
-        enabled
-        imageSize
-        titleSize
-        showCompareAtPrice
-        variantStyle
-        buttonText
-      }
+// const QUICK_VIEW_QUERY = `
+//   query QuickViewSettings {
+//     quickViewSettings: allQuickViewSettings {
+//       styling {
+//         maxWidth
+//         backgroundColor
+//         textColor
+//         buttonColor
+//         buttonTextColor
+//         fontSize
+//         borderRadius
+//       }
+//       contentElements {
+//         elementType
+//         enabled
+//         imageSize
+//         titleSize
+//         showCompareAtPrice
+//         variantStyle
+//         buttonText
+//       }
+//     }
+//   }
+// `;
+export const QUICK_VIEW_QUERY = groq`
+  *[_type == "quickViewSettings"][0]{
+    styling{
+      maxWidth,
+      backgroundColor,
+      textColor,
+      buttonColor,
+      buttonTextColor,
+      fontSize,
+      borderRadius
+    },
+    contentElements[]{
+      elementType,
+      enabled,
+      imageSize,
+      titleSize,
+      showCompareAtPrice,
+      variantStyle,
+      buttonText
     }
   }
 `;
