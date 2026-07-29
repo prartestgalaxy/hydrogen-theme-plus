@@ -59,7 +59,7 @@ export default defineConfig({
   title: 'Hydrogen-base-theme-studio',
 
   // projectId: 'fffkra71',
-  projectId: '2pcxhv7c',
+  projectId: 'v7oqr7vc',
   dataset: 'production',
 
   plugins: [
