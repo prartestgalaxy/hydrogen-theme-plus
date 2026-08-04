@@ -206,6 +206,7 @@ const Carousel = ({ images }) => {
 };
 
 const LANGUAGES = [
+  { code: 'en', name: 'English' },
   { code: 'hi', name: 'Hindi' },
   { code: 'fi', name: 'Finnish' },
   { code: 'fr', name: 'French' },
@@ -216,7 +217,7 @@ function LanguageSelector() {
   const setLanguage = useTranslationStore((state) => state.setLanguage);
 
   useEffect(() => {
-    setLanguage('hi');
+    setLanguage('en');
   }, []);
 
   return (
