@@ -360,7 +360,7 @@ export function Footer({
               ))}
 
               {/* Hardcoded Newsletter Form */}
-              <div className="custom-footer flex flex-col lg:col-span-2">
+              {/* <div className="custom-footer flex flex-col lg:col-span-2">
                 <h5
                   className='mb-[20px]'
                   style={{
@@ -394,7 +394,7 @@ export function Footer({
                 <p className="text-[12px] text-[#737373] mt-[4px]">
                   Lore imp sum dolor Amit
                 </p>
-              </div>
+              </div> */}
             </div>
           ) : (
             /* HORIZONTAL / SIMPLE LAYOUT */
