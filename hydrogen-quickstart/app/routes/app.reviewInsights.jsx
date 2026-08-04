@@ -346,6 +346,52 @@ export default function ReviewInsights() {
         </section>
 
       </div>
+
+      <div className="flex flex-col justify-center items-center w-full max-w-4xl mx-auto my-4">
+        <iframe
+          src={`https://gwl-reviews.galaxyweblinks.com/gwl-simple-rating?productId=${encodeURIComponent('10794657218870')}&shop=galaxyweblinksapps.myshopify.com`}
+          style={{
+            width: '100%',
+            height: '44px',
+            border: 'none',
+            display: 'block',
+            overflow: 'hidden',
+            background: 'transparent',
+            colorScheme: 'normal',
+            margin: '0 auto',
+          }}
+          title="Product Rating"
+        />
+
+
+       <iframe
+        src={`https://gwl-reviews.galaxyweblinks.com/gwl-star-rating?productId=${encodeURIComponent('10794657218870')}&shop=galaxyweblinksapps.myshopify.com`}
+        style={{
+          width: '100%',
+          height: '600px',
+          border: 'none',
+          display:'block',
+          overflow:'hidden',
+        }}
+      />
+
+      <iframe
+        src={`https://gwl-reviews.galaxyweblinks.com/gwl-review-widget?shop=galaxyweblinksapps.myshopify.com`}
+        style={{
+          width: '100%',
+          height: '800px',
+          border: 'none',
+          borderRadius: '12px',
+        }}
+        title="Customer Reviews Slider"
+      />
+
+      </div>
+
+      
+    
+
+       
     </div>
   );
 }
