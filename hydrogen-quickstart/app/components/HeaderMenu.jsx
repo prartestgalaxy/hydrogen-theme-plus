@@ -163,7 +163,7 @@ export function HeaderMenu({
             className={`flex-1 flex items-center gap-[10px]  md:gap-4 justify-end ml-4 fontStyle`}
             style={{ color: textColorMenu || '#23A6F0' }}
           >
-            <CountrySelector localization={localization} fontSettings={fontSettings} />
+            {/* <CountrySelector localization={localization} fontSettings={fontSettings} />
             <AccountLink isLoggedIn={isLoggedIn} />
             <button
               type="button"
@@ -173,7 +173,7 @@ export function HeaderMenu({
               <SearchIcon />
             </button>
             {isLoggedIn && <ProfileLink isLoggedIn={isLoggedIn} />}
-            <CartToggle cart={cart} />
+            <CartToggle cart={cart} /> */}
 
             {/* {wishlistSettings?.enabled && (
               <Link to="/wishlist" className="relative">
@@ -185,7 +185,7 @@ export function HeaderMenu({
                 )}
               </Link>
             )} */}
-            {wishlistSettings?.enabled && (
+            {/* {wishlistSettings?.enabled && (
               <Link to="/wishlist" className="flex items-center gap-1 group">
                 <HeartIcon className="w-6 h-6 group-hover:text-gray-400 transition-colors duration-200" />
 
@@ -195,10 +195,35 @@ export function HeaderMenu({
                   </span>
                 )}
               </Link>
-            )}
+            )} */}
+
+            <form
+              action="https://galaxyweblinksapps.myshopify.com/password"
+              method="post"
+              target="_blank"
+              className="inline-flex m-0 p-0"
+            >
+              <input type="hidden" name="form_type" value="storefront_password" />
+              <input type="hidden" name="utf8" value="✓" />
+              <input type="hidden" name="password" value="gwl" />
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
+              >
+                <span>Shopify theme</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </form>
           </div>
+
+
+
+
+
         </div>
-      </header>
+      </header >
       <HeaderAside
         isOpen={isNavOpen}
         onClose={() => setIsNavOpen(false)}

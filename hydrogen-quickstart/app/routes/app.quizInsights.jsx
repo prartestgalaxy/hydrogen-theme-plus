@@ -329,6 +329,23 @@ export default function QuizInsights() {
           </p>
         </section>
 
+        {/* Live Demo Section */}
+        <section className="space-y-6 pt-4">
+          <h2 className="text-2xl font-bold text-slate-900 tracking-wide border-b border-slate-200 pb-3">
+            Live Demo
+          </h2>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex justify-center">
+            <iframe
+              className="mx-auto block"
+              src="https://quizinsights.galaxyweblinks.com/embed/quiz?shop=galaxyweblinksapps.myshopify.com&quiz=peecc39d"
+              width="70%"
+              height="600"
+              style={{ border: 'none' }}
+              title="QuizInsights Live Demo"
+            />
+          </div>
+        </section>
+
       </div>
     </div>
   );
