@@ -1,9 +1,151 @@
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLoaderData } from "react-router";
-import reviewInsightDashboardImg from "~/assets/ReviewInsightDashboard.png";
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react';
+
+import img1 from '../assets/review-insights-1.png';
+import img2 from '../assets/review-insights-2.png';
+import img3 from '../assets/review-insights-3.png';
+import img4 from '../assets/review-insights-4.png';
+import img5 from '../assets/review-insights-5.png';
+import img6 from '../assets/review-insights-6.png';
+
+const IMAGES = [img1, img2, img3, img4, img5, img6];
 
 export async function loader({ request }) {
   return new Response("ReviewInsights App Info", { status: 200 });
 }
+
+// --- Components ---
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset, velocity) => {
+  return Math.abs(offset) * velocity;
+};
+
+const Carousel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const slideVariants = {
+    enter: (direction) => {
+      return {
+        x: direction > 0 ? 1000 : -1000,
+        opacity: 0
+      };
+    },
+    center: {
+      z: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction) => {
+      return {
+        z: 0,
+        x: direction < 0 ? 1000 : -1000,
+        opacity: 0
+      };
+    }
+  };
+
+  const paginate = useCallback((newDirection) => {
+    setDirection(newDirection);
+    setCurrentIndex((prevIndex) => {
+      let nextIndex = prevIndex + newDirection;
+      if (nextIndex >= images.length) nextIndex = 0;
+      if (nextIndex < 0) nextIndex = images.length - 1;
+      return nextIndex;
+    });
+  }, [images.length]);
+
+  const goToSlide = (index) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') paginate(1);
+      if (e.key === 'ArrowLeft') paginate(-1);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [paginate]);
+
+  if (!images || images.length === 0) {
+    return (
+      <div className="w-full h-64 bg-slate-100 rounded-2xl flex flex-col items-center justify-center text-slate-400">
+        <ImageIcon size={48} className="mb-4 opacity-50" />
+        <p>No screenshots available</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full mx-auto">
+      <div className="relative w-full overflow-hidden rounded-2xl shadow-lg border border-slate-200 bg-[#F1F1F1] aspect-[16/9] md:aspect-[16/10] lg:aspect-video flex justify-center items-center group">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.img
+            key={currentIndex}
+            src={images[currentIndex]}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            className="absolute inset-0 w-full h-full object-contain cursor-grab active:cursor-grabbing hover:scale-[1.01] transition-transform duration-700 ease-out"
+            alt={`App screenshot ${currentIndex + 1}`}
+            loading="lazy"
+          />
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={() => paginate(-1)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 z-10 disabled:opacity-0"
+          aria-label="Previous image"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={() => paginate(1)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-800 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 z-10 disabled:opacity-0"
+          aria-label="Next image"
+        >
+          <ChevronRight size={24} />
+        </button>
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="flex justify-center mt-8 space-x-3">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => goToSlide(idx)}
+            className={`h-2.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-indigo-600 w-8' : 'bg-slate-300 hover:bg-slate-400 w-2.5'
+              }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function ReviewInsights() {
   const shopifyAppLink =
@@ -52,13 +194,7 @@ export default function ReviewInsights() {
             Dashboard Overview & Management Hub
           </h2>
           <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <div className="overflow-hidden rounded-xl border border-slate-200">
-              <img
-                src={reviewInsightDashboardImg}
-                alt="ReviewInsights Dashboard Overview"
-                className="w-full h-auto object-cover"
-              />
-            </div>
+            <Carousel images={IMAGES} />
 
           </div>
         </section>
