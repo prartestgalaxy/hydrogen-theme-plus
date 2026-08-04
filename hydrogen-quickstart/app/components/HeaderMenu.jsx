@@ -1,11 +1,11 @@
-import {useState, Suspense, useEffect} from 'react';
-import {Await, NavLink, useNavigate, useLocation} from 'react-router';
-import {useAside} from '~/components/Aside';
-import {useOptimisticCart, useAnalytics, Image} from '@shopify/hydrogen';
-import {HeaderAside} from './HeaderAside';
-import {CountrySelector} from './CountrySelector';
-import {Link} from '~/components/Link';
-import {useWishlist} from '~/context/WishlistContext';
+import { useState, Suspense, useEffect } from 'react';
+import { Await, NavLink, useNavigate, useLocation } from 'react-router';
+import { useAside } from '~/components/Aside';
+import { useOptimisticCart, useAnalytics, Image } from '@shopify/hydrogen';
+import { HeaderAside } from './HeaderAside';
+import { CountrySelector } from './CountrySelector';
+import { Link } from '~/components/Link';
+import { useWishlist } from '~/context/WishlistContext';
 export function HeaderMenu({
   header,
   isLoggedIn,
@@ -15,10 +15,10 @@ export function HeaderMenu({
   localization,
   globalData,
 }) {
-  const {open} = useAside();
+  const { open } = useAside();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const {count, wishlist} = useWishlist();
+  const { count, wishlist } = useWishlist();
   // Ensure dynamic classes only apply after hydration
   useEffect(() => {
     setMounted(true);
@@ -117,12 +117,12 @@ export function HeaderMenu({
     <>
       {globalData && <style>{dynamicStyles}</style>}
       <header
-        style={{backgroundColor, color: textColor}}
+        style={{ backgroundColor, color: textColor }}
         className="px-4 md:px-[7%] w-full max-w-[100%]  pt-[12px] sticky top-0 z-[40] shadow-sm transition-colors border-b border-gray-100 pb-[12px] sm:pb-0"
       >
         <div
           className={` mx-auto flex items-center justify-between flex-col sm:flex-row relative `}
-          style={{fontSize: fontSize}}
+          style={{ fontSize: fontSize }}
         >
           <div className="flex-1 flex items-center gap-4">
             <button
@@ -161,7 +161,7 @@ export function HeaderMenu({
 
           <div
             className={`flex-1 flex items-center gap-[10px]  md:gap-4 justify-end ml-4 fontStyle`}
-            style={{color: textColorMenu || '#23A6F0'}}
+            style={{ color: textColorMenu || '#23A6F0' }}
           >
             <CountrySelector localization={localization} fontSettings={fontSettings} />
             <AccountLink isLoggedIn={isLoggedIn} />
@@ -239,15 +239,14 @@ function HeaderDropdownItem({
         to={linkUrl}
         prefetch="intent"
         end
-        className={({isActive}) =>
-          `flex items-center gap-1.5 headerMenuFont header-link font-bold tracking-widest transition-colors ${
-            (isActive && linkUrl !== '#') || isChildActive
-              ? 'active-menu-link'
-              : ''
+        className={({ isActive }) =>
+          `flex items-center gap-1.5 headerMenuFont header-link font-bold tracking-widest transition-colors whitespace-nowrap ${(isActive && linkUrl !== '#') || isChildActive
+            ? 'active-menu-link'
+            : ''
           }`
         }
       >
-        <span>{item.label}</span>
+        <span className="whitespace-nowrap">{item.label}</span>
         {hasChildren && (
           <span className="transition-transform duration-200 group-hover:rotate-180">
             <ChevronDownIcon />
@@ -270,9 +269,8 @@ function HeaderDropdownItem({
                 to={childUrl}
                 prefetch="intent"
                 end
-                className={({isActive}) =>
-                  `block px-6 py-2.5 ${fontSize} text-left headerMenuFont header-link tracking-[0.15em] hover:bg-gray-50 transition-colors ${
-                    isActive && childUrl !== '#' ? 'active-menu-link' : ''
+                className={({ isActive }) =>
+                  `block px-6 py-2.5 ${fontSize} text-left headerMenuFont header-link tracking-[0.15em] hover:bg-gray-50 transition-colors ${isActive && childUrl !== '#' ? 'active-menu-link' : ''
                   }`
                 }
               >
@@ -288,7 +286,7 @@ function HeaderDropdownItem({
 
 /* --- HELPER COMPONENTS --- */
 
-function Logo({logo}) {
+function Logo({ logo }) {
   return (
     // Added shrink-0 to prevent the parent flex container from squishing the logo
     <Link to="/" className="flex items-center shrink-0"
@@ -296,8 +294,8 @@ function Logo({logo}) {
       {logo?.asset?.url ? (
         <Image
           style={{
-          height: '58px',
-          width: '108px'
+            height: '58px',
+            width: '108px'
           }}
           src={logo?.asset?.url}
           alt="Logo"
@@ -317,7 +315,7 @@ function Logo({logo}) {
   );
 }
 
-export function ProfileLink({isLoggedIn}) {
+export function ProfileLink({ isLoggedIn }) {
   return (
     <Suspense fallback={<AccountIcon />}>
       <Await resolve={isLoggedIn}>
@@ -331,10 +329,10 @@ export function ProfileLink({isLoggedIn}) {
   );
 }
 
-export function AccountLink({isLoggedIn}) {
+export function AccountLink({ isLoggedIn }) {
   const handleLogout = async () => {
     try {
-      await fetch('/logout', {method: 'POST'});
+      await fetch('/logout', { method: 'POST' });
       window.location.href = '/signin';
     } catch (err) {
       console.error('Logout failed:', err);
@@ -371,7 +369,7 @@ export function AccountLink({isLoggedIn}) {
   );
 }
 
-function CartToggle({cart}) {
+function CartToggle({ cart }) {
   return (
     <Suspense fallback={<CartBadge count={0} />}>
       <Await resolve={cart}>
@@ -384,9 +382,9 @@ function CartToggle({cart}) {
   );
 }
 
-function CartBadge({count}) {
-  const {open} = useAside();
-  const {publish, shop, cart, prevCart} = useAnalytics();
+function CartBadge({ count }) {
+  const { open } = useAside();
+  const { publish, shop, cart, prevCart } = useAnalytics();
 
   return (
     <Link
