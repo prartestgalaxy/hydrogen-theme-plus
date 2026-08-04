@@ -245,7 +245,7 @@ export function ProductItem({
     return (
       <div className="flex items-center gap-3 w-full hover:opacity-70 group border-b border-gray-100 pb-3 last:border-0">
         {/* Product Image */}
-        {image && (
+        {image?.url && (
           <Link
             to={`/products/${product.handle}`}
             onClick={() => onQuickView?.(product.handle)}

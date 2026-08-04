@@ -1,1 +1,0 @@
-import{j as i}from"./jsx-runtime-DhjjMwep.js";import{b as e,L as n}from"./chunk-TMI4QPZX-BLmhRnqS.js";function l({to:s,children:r,...a}){const{locale:t}=e(),o=t&&s.startsWith("/")&&!s.startsWith(`/${t}`)?`/${t}${s}`.replace(/\/+/g,"/"):s;return i.jsx(n,{to:o,...a,children:r})}export{l as L};

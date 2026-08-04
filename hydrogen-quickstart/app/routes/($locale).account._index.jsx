@@ -1561,7 +1561,7 @@ function OrderDetails({order, onBack}) {
             >
               <div className="flex gap-4 items-center">
                 <div className="w-[60px] h-[75px] bg-white rounded-md flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
-                  {item?.variant?.image ? (
+                  {item?.variant?.image?.url ? (
                     <img
                       src={item.variant.image.url}
                       alt={item?.title}

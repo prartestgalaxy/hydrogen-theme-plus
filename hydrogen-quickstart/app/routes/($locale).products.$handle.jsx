@@ -3696,11 +3696,12 @@ export default function Product() {
   const sliderImages = product?.images?.nodes || [];
 
   const filteredImages = useMemo(() => {
-    if (!selectedColor) return sliderImages;
-    const colorImages = sliderImages.filter((image) =>
+    const validImages = sliderImages.filter(img => img?.url);
+    if (!selectedColor) return validImages;
+    const colorImages = validImages.filter((image) =>
       image.altText?.toLowerCase().includes(selectedColor.toLowerCase()),
     );
-    return colorImages.length > 0 ? colorImages : sliderImages;
+    return colorImages.length > 0 ? colorImages : validImages;
   }, [sliderImages, selectedColor]);
 
   // Initialize Keen-Slider

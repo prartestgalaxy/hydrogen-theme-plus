@@ -96,7 +96,7 @@ export default function QuickView({
       const images = [];
       const seenUrls = new Set();
 
-      if (productData.featuredImage) {
+      if (productData.featuredImage?.url) {
         images.push({
           url: productData.featuredImage.url,
           altText: productData.featuredImage.altText,
@@ -614,25 +614,29 @@ export default function QuickView({
                     key={idx}
                     className="flex-shrink-0 w-full h-full flex items-center justify-center snap-center p-4"
                   >
-                    <Image
-                      src={img.url}
-                      alt={img.altText || product.title}
-                      className={`w-full h-full object-contain max-h-[500px] transition-all duration-500 mix-blend-multiply ${loaded ? 'blur-0' : 'blur-xl'}`}
-                      loading="lazy"
-                      onLoad={(e) => (e.currentTarget.style.filter = 'blur(0)')}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                    />
+                    {img?.url && (
+                      <Image
+                        src={img.url}
+                        alt={img.altText || product.title}
+                        className={`w-full h-full object-contain max-h-[500px] transition-all duration-500 mix-blend-multiply ${loaded ? 'blur-0' : 'blur-xl'}`}
+                        loading="lazy"
+                        onLoad={(e) => (e.currentTarget.style.filter = 'blur(0)')}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                      />
+                    )}
                   </div>
                 ))
               ) : (
                 <div className="flex-shrink-0 w-full h-full flex items-center justify-center p-4">
-                  <Image
-                    src={product.featuredImage?.url}
-                    alt={product.title}
-                    className={`w-full h-full object-contain max-h-[500px] transition-all duration-500 mix-blend-multiply ${loaded ? 'blur-0' : 'blur-xl'}`}
-                    loading="lazy"
-                    onLoad={(e) => (e.currentTarget.style.filter = 'blur(0)')}
-                  />
+                  {product.featuredImage?.url && (
+                    <Image
+                      src={product.featuredImage.url}
+                      alt={product.title}
+                      className={`w-full h-full object-contain max-h-[500px] transition-all duration-500 mix-blend-multiply ${loaded ? 'blur-0' : 'blur-xl'}`}
+                      loading="lazy"
+                      onLoad={(e) => (e.currentTarget.style.filter = 'blur(0)')}
+                    />
+                  )}
                 </div>
               )}
             </div>

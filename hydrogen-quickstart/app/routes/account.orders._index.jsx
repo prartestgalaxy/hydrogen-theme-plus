@@ -455,7 +455,7 @@ export default function OrdersIndex() {
                               key={index}
                               className="h-12 w-12 rounded-full bg-gray-100 overflow-hidden"
                             >
-                              {item.variant?.image ? (
+                              {item.variant?.image?.url ? (
                                 <Image 
                                   src={item.variant.image.url}
                                   sizes="(max-width: 640px) 100vw,

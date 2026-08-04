@@ -587,7 +587,7 @@ function OrderItemsTab({ order }) {
               <div className="flex items-center space-x-4">
                 {/* Product Image */}
                 <div className="flex-shrink-0 h-20 w-20 bg-gray-100 rounded-lg overflow-hidden">
-                  {item.variant?.image ? (
+                  {item.variant?.image?.url ? (
                   <Image
                     src={item.variant.image.url}
                     alt={item.variant.image.altText || item.title}
@@ -596,17 +596,17 @@ function OrderItemsTab({ order }) {
                     sizes="(max-width: 640px) 100vw,
                           (max-width: 1024px) 50vw,
                           400px"
-                    className={`"
+                    className={`
                       h-full w-full object-cover
                       scale-105
                       transition-all duration-700 ease-out
-                    " ${loaded ? 'blur-0' : 'blur-xl'} `}
+                      ${loaded ? 'blur-0' : 'blur-xl'} 
+                    `}
                     onLoad={(e) => {
                       e.currentTarget.classList.remove('blur-xl', 'scale-105');
                       e.currentTarget.classList.add('blur-0', 'scale-100');
                     }}
                   />
-
                   ) : (
                     <div className="h-full w-full flex items-center justify-center bg-gray-200">
                       <img src={No_Image} alt="No Image" className="h-full w-full object-cover" />

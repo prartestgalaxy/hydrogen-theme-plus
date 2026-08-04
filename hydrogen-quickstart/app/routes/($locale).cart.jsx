@@ -950,7 +950,7 @@ function BestsellersSection({ products, globalData, isLoggedIn, isWishlistEnable
               <Link to={`/products/${product.handle}`} className="block h-full">
               <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
                 
-                {product.featuredImage && (
+                {product.featuredImage?.url && (
                   <img
                     src={product.featuredImage.url}
                     alt={product.featuredImage.altText || product.title}
