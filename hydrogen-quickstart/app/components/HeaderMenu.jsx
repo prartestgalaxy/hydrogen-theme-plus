@@ -208,8 +208,7 @@ export function HeaderMenu({
               <input type="hidden" name="password" value="gwl" />
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
-              >
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#F5AC2A] hover:bg-[#F5AC2A] text-black text-sm font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"              >
                 <span>Shopify theme</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

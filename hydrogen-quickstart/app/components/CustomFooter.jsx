@@ -199,7 +199,7 @@ export function Footer({
   const dynamicStyles = `
     .custom-footer {
       font-family: ${globalData?.fontFamily ? globalData.fontFamily : 'Montserrat, sans-serif'};
-      font-size: ${fontSize? fontSize : globalData?.baseFontSize ? globalData.baseFontSize : 14}px;
+      font-size: ${fontSize ? fontSize : globalData?.baseFontSize ? globalData.baseFontSize : 14}px;
       font-weight: 700;
       leading-trim: NONE;
       line-height: 24px;
@@ -244,18 +244,18 @@ export function Footer({
     <>
       {globalData && <style>{dynamicStyles}</style>}
       <footer
-        className="w-full ml-0 pt-[42px] md:ml-0 custom-footer"
+        className="w-full ml-0 pt-[20px] md:ml-0 custom-footer"
         style={{ backgroundColor: backgroundColor, color: textColor }}
       >
         {/* --- TOP BAR (Logo & Socials) --- */}
-        <div className="max-w-[100%] px-[7%] mx-auto pb-[42px] flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="font-bold text-2xl tracking-wide">
+        <div className="max-w-[100%] px-[7%] mx-auto pb-[20px] flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="font-bold text-2xl tracking-wide flex justify-start">
             {logo?.asset?.url ? (
               <img
                 src={logo.asset.url}
                 style={{ width: logo.width ? `${logo.width}px` : 'auto' }}
                 alt="Footer Logo"
-                className="h-8 object-contain transition-all duration-500"
+                className="h-8 object-contain object-left transition-all duration-500"
                 loading="lazy"
               />
             ) : (
@@ -290,7 +290,7 @@ export function Footer({
                   />
                 </a>
               )}
-               {socials.instagram && (
+              {socials.instagram && (
                 <a
                   href={socials.instagram}
                   target="_blank"
@@ -311,7 +311,7 @@ export function Footer({
                   rel="noreferrer"
                   className="hover:scale-110 transition-transform"
                 >
-                   <img
+                  <img
                     src={twitterLogo}
                     alt="Twitter"
                     style={{ height: '24px', width: '24px' }}
@@ -327,17 +327,18 @@ export function Footer({
         </div>
 
         {/* --- MAIN CONTENT AREA --- */}
-        <div className="max-w-[100%] px-[7%] mx-auto py-[50px]">
+        <div className="max-w-[100%] px-[7%] mx-auto py-[20px]">
           {variant === 'columns' ? (
             /* COLUMN LAYOUT */
-            <div className="grid grid-cols-1 gap-[30px] md:grid-cols-2 gap-[40px] lg:grid-cols-6 gap-[80px]">
+            <div className={`grid grid-cols-1 sm:grid-cols-2 ${columns?.length >= 4 ? 'lg:grid-cols-4' : columns?.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} gap-[40px] lg:gap-[80px] w-full`}>
               {/* Sanity Dynamic Columns */}
               {columns?.map((col, i) => (
                 <div
                   key={i}
-                  className={`custom-footer flex flex-col gap-5 ${alignment === 'center' ? 'items-center text-center' : alignment === 'right' ? 'items-end text-right' : 'items-start text-left'}`}
+                  className={`custom-footer flex flex-col gap-5 w-full ${alignment === 'center' ? 'items-center text-center' : alignment === 'right' ? 'items-end text-right' : 'items-start text-left'}`}
                 >
                   <h5
+                    className="font-bold"
                     style={{
                       color: '#252B42',
                     }}
