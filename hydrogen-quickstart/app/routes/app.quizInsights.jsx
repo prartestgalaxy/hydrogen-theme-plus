@@ -330,7 +330,7 @@ export default function QuizInsights() {
         </section>
 
         {/* Live Demo Section */}
-        <section className="space-y-6 pt-4">
+        {/* <section className="space-y-6 pt-4">
           <h2 className="text-2xl font-bold text-slate-900 tracking-wide border-b border-slate-200 pb-3">
             Live Demo
           </h2>
@@ -344,7 +344,42 @@ export default function QuizInsights() {
               title="QuizInsights Live Demo"
             />
           </div>
+        </section> */}
+
+
+        {/* See Demo Button */}
+        <section className="pt-4 flex justify-center">
+          <a
+            href="https://sanityhydrogentheme-production.up.railway.app/app/quiz"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '12px 28px',
+              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+              color: '#ffffff',
+              fontWeight: '600',
+              fontSize: '15px',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 14px rgba(99, 102, 241, 0.4)',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(99, 102, 241, 0.5)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 14px rgba(99, 102, 241, 0.4)';
+            }}
+          >
+            See Demo
+          </a>
         </section>
+
 
       </div>
     </div>
